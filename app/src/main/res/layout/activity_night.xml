@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NightActivity">
+
+    <TextView
+        android:id="@+id/mafia_choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/mafiaChoice"
+        android:textSize="25sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/MafiaChoice"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mafia_choice" />
+
+    <Button
+        android:id="@+id/EndNight"
+        android:layout_width="240dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="28dp"
+        android:backgroundTint="@color/red"
+        android:fontFamily="@font/irishgrover_regular"
+        android:gravity="center|center_vertical"
+        android:text="@string/next"
+        android:textSize="55sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="4dp" />
+
+    <TextView
+        android:id="@+id/playersRole"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_margin="40dp"
+        android:text="TextView"
+        android:textSize="30sp"
+        android:gravity="center|center_vertical"
+        app:layout_constraintBottom_toTopOf="@+id/EndNight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MafiaChoice" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
