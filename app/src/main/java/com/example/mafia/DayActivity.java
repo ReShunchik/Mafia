@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.Collections;
+
 public class DayActivity extends AppCompatActivity {
 
     Button NextPerson;
@@ -20,10 +22,11 @@ public class DayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_day);
 
         TextView text = findViewById(R.id.DiePerson);
-        if(PlayerManager.getKilledPlayer().equals("nothing"))
+        if(PlayerManager.getKilledPlayer().equals("никто"))
            text.setText("Никто не убит");
         else {
-            String fortext = "Убит(а)" + PlayerManager.getKilledPlayer();
+            String fortext = "Убит(а)";
+            fortext += PlayerManager.getKilledPlayer();
             text.setText(fortext);
         }
 
@@ -43,10 +46,11 @@ public class DayActivity extends AppCompatActivity {
         NextPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PlayerManager.addWhoVoted(PersonChoice.getSelectedItem().toString());
-                turnOfSpeech++;
-                if(turnOfSpeech == PlayerManager.getPlayersCount())
+                if(turnOfSpeech == PlayerManager.getPlayersCount()){
+                    PlayerManager.addWhoVoted(PersonChoice.getSelectedItem().toString());
                     startActivity(GoToVote);
+                }
+                turnOfSpeech++;
             }
         });
     }

@@ -6,19 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".SecondSetting">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/set_roles"
-        android:layout_width="420dp"
-        android:layout_height="408dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/test1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
     <Button
         android:id="@+id/start_button2"
         android:layout_width="240dp"
@@ -35,15 +22,43 @@
         app:strokeColor="@color/black"
         app:strokeWidth="4dp" />
 
-    <Button
-        android:id="@+id/test1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/start_button2"
+    <EditText
+        android:id="@+id/EnterMafia"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:inputType="text"
+        android:gravity="center|center_vertical"
+        android:hint="@string/mafia"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/EnterDon"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:inputType="text"
+        android:gravity="center|center_vertical"
+        android:hint="@string/don"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EnterMafia" />
+
+    <EditText
+        android:id="@+id/EnterCommissar"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:inputType="text"
+        android:gravity="center|center_vertical"
+        android:hint="@string/comissar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EnterDon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

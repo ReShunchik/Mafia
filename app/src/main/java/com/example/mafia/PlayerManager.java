@@ -7,11 +7,10 @@ import java.util.ArrayList;
     public class PlayerManager{
         private static byte playersCount, mafiasCount;                                                // число игроков и мафий
         private static byte speechTime;                                                               // время на речь
-        private static String killedPlayer = "nothing";
+        private static String killedPlayer = "никто";
         private static ArrayList<Player> players = new ArrayList<>();                                 // массив хранящий информацию об игроке
         private static ArrayList<String> whoVoted = new ArrayList<>();                                // игроки на голосовании
         private static String[] roles = {"Мирный", "Мафия","Дон","Комиссар"};
-        public static String TEST;
 
         public static void setPlayers(String str){
             String[] names = str.split(",");
@@ -49,6 +48,17 @@ import java.util.ArrayList;
                         return true;
             return false;
         }                                      // проверка на совпадение имён
+        public static boolean checkRightNames(String namesForCheck){
+            String[] names = namesForCheck.split(",");
+            boolean isOk = true;
+            for(String name: names){
+                if(getPlayersNames().indexOf(name) == -1)
+                    isOk = false;
+                else
+                    isOk = true;
+            }
+            return isOk;
+        }
 
         public static void killPlayer(String name){
             for(Player player: players)
@@ -68,8 +78,8 @@ import java.util.ArrayList;
         }                                                            // проверка на конец игры
         public static String whoWin(){
             if(mafiasCount == 0)
-                return "Citizen";
-            return "Mafia";
+                return "Мирных";
+            return "Мафии";
         }                                                            // кто выйграл
 
         public static ArrayList<String> getPlayersNames(){
@@ -109,7 +119,20 @@ import java.util.ArrayList;
         public static byte getSpeechTime(){return speechTime;}                                        // сколько времени на речь
         public static String getKilledPlayer(){return killedPlayer;}                                  // получение убитого игрока
         public static String[] getRoles(){return roles;}
+        public static String getWhoVoted(int position){
+            return whoVoted.get(position);
+        }
+        public static int getCountVoted(){
+            return whoVoted.size();
+        }
 
         public static String getRole(int position){return (players.get(position)).getRole();}
+        public static String getInfo(){
+            String info = "Мафия: ";
+            info += (getMafiasNames() + '\n');
+            info +=("Дон: " + getDonName() + '\n');
+            info += ("Комиссар: " + getComissarName());
+            return info;
+        }
     }
 

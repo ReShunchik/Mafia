@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class SecondSetting extends AppCompatActivity {
 
@@ -20,37 +21,25 @@ public class SecondSetting extends AppCompatActivity {
         setContentView(R.layout.activity_second_setting);
 
         Button start = findViewById(R.id.start_button2);
-        Button test = findViewById(R.id.test1);
+        EditText editMafia = findViewById(R.id.EnterMafia);
+        EditText editDon = findViewById(R.id.EnterDon);
+        EditText editCommissar = findViewById(R.id.EnterCommissar);
 
-        RecyclerView setRoles = findViewById(R.id.set_roles);
-
-
-        RolesAdapter roles = new RolesAdapter(SecondSetting.this);
-        setRoles.setLayoutManager(new LinearLayoutManager(this));
-        setRoles.setAdapter(roles);
-
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                roles.setCount();
-                setRoles.setLayoutManager(new LinearLayoutManager(SecondSetting.this));
-            }
-        });
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*String mafia = "", don = "", commisar = "";
-                for(int i = 0; i < roles.getItemCount(); i++){
-                    if((roles.playerRole.get(i).equals("Мафия")))
-                        mafia += (roles.names.get(i)) + " ";
-                    if((roles.playerRole.get(i).equals("Дон")))
-                        don = (roles.names.get(i));
-                    if((roles.playerRole.get(i).equals("Комиссар")))
-                        commisar = (roles.names.get(i));
+                String[] mafias = (editMafia.getText().toString()).split(",");
+                String don = editDon.getText().toString();
+                String comissar = editCommissar.getText().toString();
+                String forcheck = (editMafia.getText().toString()).split(",") + don + "," + comissar;
+                if(PlayerManager.checkRightNames(forcheck) == true){
+                    PlayerManager.setRoles(mafias, don, comissar);
+                    Intent set2ToNight = new Intent(view.getContext(), DayActivity.class);
                 }
-                PlayerManager.setRoles(mafia.split(" "), don, commisar);*/
-                Intent Set2ToDay = new Intent(SecondSetting.this, DayActivity.class);
-                startActivity(Set2ToDay);
+                else{
+                    String text = "Ошибка в имени игрока";
+                    Toast.makeText(view.getContext(), text, Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

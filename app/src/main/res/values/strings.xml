@@ -25,5 +25,7 @@
 
     <string name="mafiaChoice">Выбор мафии</string>
 
+    <string name="endText">NEW\nGAME</string>
+
 
 </resources>
