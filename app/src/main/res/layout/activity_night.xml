@@ -7,11 +7,11 @@
     tools:context=".NightActivity">
 
     <TextView
-        android:id="@+id/mafia_choice"
+        android:id="@+id/wake_up_in_night"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:text="@string/mafiaChoice"
+        android:text="text"
         android:textSize="25sp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +26,7 @@
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mafia_choice" />
+        app:layout_constraintTop_toBottomOf="@+id/wake_up_in_night" />
 
     <Button
         android:id="@+id/EndNight"

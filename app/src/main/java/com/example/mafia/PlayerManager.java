@@ -1,16 +1,16 @@
 package com.example.mafia;
-import android.telephony.CellSignalStrength;
 
 import java.util.ArrayList;
 
 
     public class PlayerManager{
-        private static byte playersCount, mafiasCount;                                                // число игроков и мафий
-        private static byte speechTime;                                                               // время на речь
+        private static int NumberOfDay = 1;
+        private static byte mafiasCount;                                                // число мафий
+        private static long speechTime;                                                               // время на речь
         private static String killedPlayer = "никто";
         private static ArrayList<Player> players = new ArrayList<>();                                 // массив хранящий информацию об игроке
         private static ArrayList<String> whoVoted = new ArrayList<>();                                // игроки на голосовании
-        private static String[] roles = {"Мирный", "Мафия","Дон","Комиссар"};
+        public static String[] roles = {"Мирный", "Мафия","Комиссар","Дон"};
 
         public static void setPlayers(String str){
             String[] names = str.split(",");
@@ -19,28 +19,29 @@ import java.util.ArrayList;
                 players.add(player);
             }
         }                                            // массив со всеми игроками
-        public static void setRoles(String[] mafias, String don, String comissar){
-            for(Player player: players){
-                for(String nameMaf: mafias){
-                    if(nameMaf.equals(player.getName())){
-                        if(nameMaf.equals(don)) {
-                            player.setRole("don");
-                        }
-                        else
+        public static void setRoles(String[] mafias, String don, String comissar)
+        {
+            for(Player player: players)
+            {
+                for(String nameMaf: mafias)
+                {
+                    if(nameMaf.equals(player.getName()))
+                    {
                             player.setRole("mafia");
-                        break;
+                            break;
                     }
                 }
-                if(comissar.equals(player.getName())){
+                if(don.equals(player.getName()))
+                {
+                    player.setRole("don");
+                }
+                if(comissar.equals(player.getName()))
+                {
                     player.setRole("comissar");
                 }
             }
         }                // присваивание роли каждому игроку
-        public static void setPlayersCount(byte count){
-            playersCount = count;
-            mafiasCount = (byte) (playersCount / 3);
-        }                         // установление кол-ва игроков
-        public static void setSpeechTime(byte time){speechTime = time;}                               // установление времени на речь
+        public static void setSpeechTime(long time){speechTime = time;}                               // установление времени на речь
         public static boolean CheckSameName(String[] names){
             for(int i = 0; i < names.length-1; i++)
                 for(int j = i+1; j < names.length; j++)
@@ -50,20 +51,17 @@ import java.util.ArrayList;
         }                                      // проверка на совпадение имён
         public static boolean checkRightNames(String namesForCheck){
             String[] names = namesForCheck.split(",");
-            boolean isOk = true;
-            for(String name: names){
+            for(String name: names)
                 if(getPlayersNames().indexOf(name) == -1)
-                    isOk = false;
-                else
-                    isOk = true;
-            }
-            return isOk;
+                    return false;
+            return true;
         }
 
         public static void killPlayer(String name){
             for(Player player: players)
                 if(name.equals(player.getName())) {
                     players.remove(player);
+
                     setKilledPlayer(name);
                 }
         }                                    // удаление игрока
@@ -72,7 +70,7 @@ import java.util.ArrayList;
             whoVoted.add(name);
         }
         public static boolean isContinue(){
-            if(((playersCount - mafiasCount) <= (mafiasCount+1)) || mafiasCount == 0)
+            if(((getPlayersCount() - mafiasCount) <= (mafiasCount+1)) || mafiasCount == 0)
                 return false;
             return true;
         }                                                            // проверка на конец игры
@@ -115,8 +113,10 @@ import java.util.ArrayList;
             return name;
 
         }                                                   // кто комиссар
-        public static byte getPlayersCount(){return playersCount;}                                    // получение кол-ва игрокв
-        public static byte getSpeechTime(){return speechTime;}                                        // сколько времени на речь
+        public static byte getPlayersCount(){
+            return (byte)players.size();
+        }                                    // получение кол-ва игрокв
+        public static long getSpeechTime(){return speechTime;}                                        // сколько времени на речь
         public static String getKilledPlayer(){return killedPlayer;}                                  // получение убитого игрока
         public static String[] getRoles(){return roles;}
         public static String getWhoVoted(int position){
@@ -125,10 +125,16 @@ import java.util.ArrayList;
         public static int getCountVoted(){
             return whoVoted.size();
         }
+        public static int getNumberOfDay(){
+            return NumberOfDay;
+        }
+        public static void IncreaseNumberOfDay(){
+            NumberOfDay++;
+        }
 
         public static String getRole(int position){return (players.get(position)).getRole();}
         public static String getInfo(){
-            String info = "Мафия: ";
+            String info = "Мафии: ";
             info += (getMafiasNames() + '\n');
             info +=("Дон: " + getDonName() + '\n');
             info += ("Комиссар: " + getComissarName());

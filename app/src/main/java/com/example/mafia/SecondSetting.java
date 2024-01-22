@@ -1,17 +1,15 @@
 package com.example.mafia;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.Arrays;
 
 public class SecondSetting extends AppCompatActivity {
 
@@ -25,16 +23,20 @@ public class SecondSetting extends AppCompatActivity {
         EditText editDon = findViewById(R.id.EnterDon);
         EditText editCommissar = findViewById(R.id.EnterCommissar);
 
+
+
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String[] mafias = (editMafia.getText().toString()).split(",");
                 String don = editDon.getText().toString();
                 String comissar = editCommissar.getText().toString();
-                String forcheck = (editMafia.getText().toString()).split(",") + don + "," + comissar;
-                if(PlayerManager.checkRightNames(forcheck) == true){
+                String forcheck;
+                forcheck = Arrays.toString((editMafia.getText().toString()).split(",")) + don + "," + comissar;
+                if(!PlayerManager.checkRightNames(forcheck)){
                     PlayerManager.setRoles(mafias, don, comissar);
                     Intent set2ToNight = new Intent(view.getContext(), DayActivity.class);
+                    startActivity(set2ToNight);
                 }
                 else{
                     String text = "Ошибка в имени игрока";

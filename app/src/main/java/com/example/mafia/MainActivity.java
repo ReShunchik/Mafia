@@ -14,7 +14,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText input_number = findViewById(R.id.input_number);
         EditText input_players = findViewById(R.id.input_players);
         EditText input_time = findViewById(R.id.input_time);
         Button next = findViewById(R.id.start_button1);
@@ -24,9 +23,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent Set1ToSet2 = new Intent(view.getContext(), SecondSetting.class);
                 startActivity(Set1ToSet2);
-                PlayerManager.setPlayersCount(Byte.parseByte(input_number.getText().toString()));
                 PlayerManager.setPlayers(input_players.getText().toString());
-                PlayerManager.setSpeechTime(Byte.parseByte(input_time.getText().toString()));
+                PlayerManager.setSpeechTime(Long.parseLong(input_time.getText().toString()));
             }
         });
     }

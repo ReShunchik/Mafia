@@ -24,45 +24,16 @@
         app:strokeWidth="4dp"/>
 
     <TextView
-        android:id="@+id/count_players"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="35dp"
-        android:gravity="center|center_vertical"
-        android:text="@string/gamers_count"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/input_number"
-        android:layout_width="210dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="15dp"
-        android:ems="10"
-        android:gravity="center|center_vertical"
-        android:hint="@string/input_num"
-        android:textSize="25dp"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/count_players"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/players_spisok"
         android:layout_width="160sp"
         android:layout_height="80sp"
-        android:layout_marginTop="40dp"
         android:gravity="center|center_vertical"
         android:text="@string/spisok"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/count_players" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/input_players"
