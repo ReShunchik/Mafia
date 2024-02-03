@@ -22,9 +22,6 @@ public class DayActivity extends AppCompatActivity {
     private Spinner PersonChoice;
     private CountDownTimer timer;
 
-    public DayActivity() {
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
