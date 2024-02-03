@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">Mafia</string>
-    <string name="next">Next</string>
+    <string name="next">NEXT</string>
     <string name="gamers_count">Количество \n игроков</string>
     <string name="input_num">Введите число</string>
     <string name="spisok">Список игроков</string>
-    <string name="players">Игроки</string>
+    <string name="players">Введите имя игрока</string>
+    <string name="add">ДОБАВИТЬ</string>
 
 
     <string name="input_time1">Время \n на речь</string>
     <string name="input_time2">Укажите время</string>
-    <string name="start">Start</string>
+    <string name="start">НАЧАТЬ</string>
     <string name="role">Роль</string>
     <string name="count">Количетво</string>
     <string name="mafia">Мафия</string>
@@ -21,9 +22,9 @@
 
     <string name="who_dye">Убит</string>
 
-    <string name="vote">Голосование</string>
+    <string name="vote">КТО ГОЛОСУЕТ\nЗА</string>
 
-    <string name="endText">NEW\nGAME</string>
+    <string name="endText">NEW\nGame</string>
 
 
 </resources>

@@ -1,7 +1,7 @@
 package com.example.mafia;
 public class Player {
     private String name, role;
-    private int numberOfVote;
+    private int numberOfVote = 0;
     Player(String n){                                                 //создание игрока
         setName(n);
         setRole("citizen");
@@ -22,4 +22,5 @@ public class Player {
     public String getRole(){
         return role;
     }                          //получение роли игрока
+    public int getNumberOfVote(){return numberOfVote;}    //получение кол-ва голосов
 }

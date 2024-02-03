@@ -8,19 +8,22 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 public class DayActivity extends AppCompatActivity {
 
+    private TextView textTime, whoSpeak;
+    private byte turnOfSpeech = 1, forSpeech = 0;
+    private long minutes, seconds;
+    private String time;
+    private String startTime;
     private Button button;
-    private TextView time;
-    private ProgressBar pb;
-    private byte turnOfSpeech = 1;
-    private byte forSpeech = 0;
+    private Spinner PersonChoice;
+    private CountDownTimer timer;
 
-    CountDownTimer timer;
+    public DayActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +32,14 @@ public class DayActivity extends AppCompatActivity {
 
         TextView text = findViewById(R.id.DiePerson);
         if (PlayerManager.getKilledPlayer().equals("никто"))
-            text.setText("Никто не убит");
+            text.setText("Никто не" + "\n" + "убит");
         else {
             String fortext = "Убит(а) ";
             fortext += PlayerManager.getKilledPlayer();
             text.setText(fortext);
         }
 
-        TextView whoSpeak = findViewById(R.id.WhoSpeak);
+        whoSpeak = findViewById(R.id.WhoSpeak);
         whoSpeak.setText("Речи игрока " + turnOfSpeech);
 
         ArrayAdapter<String> PersonChoiceAdapter = new ArrayAdapter<>(
@@ -46,60 +49,63 @@ public class DayActivity extends AppCompatActivity {
         );
         PersonChoiceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        Spinner PersonChoice = findViewById(R.id.PersonChoice);
+        PersonChoice = findViewById(R.id.PersonChoice);
         PersonChoice.setAdapter(PersonChoiceAdapter);
 
-        time = findViewById(R.id.Timer);
-        pb = findViewById(R.id.progressBar);
+        button = (Button)findViewById(R.id.Button);
 
+        seconds = PlayerManager.getSpeechTime()%60;
+        minutes = (PlayerManager.getSpeechTime()/60)%60;
+        startTime = String.format("%d:%d", minutes, seconds);
+        textTime = findViewById(R.id.Timer);
+        textTime.setText(startTime);
 
-        button = findViewById(R.id.Button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (turnOfSpeech <= PlayerManager.getPlayersCount()) {
-                    if(forSpeech == 0){
-                        startTimer(time, pb);
-                        button.setText("STOP");
-                        forSpeech++;
-                    } else if (forSpeech == 1) {
-                        cancelTimer();
-                        button.setText("NEXT");
-                        forSpeech++;
-                        turnOfSpeech++;
-                    } else if (forSpeech == 2) {
-                        if (PlayerManager.getNumberOfDay() > 1) {
-                            String name = PersonChoice.getSelectedItem().toString();
-                            PlayerManager.addWhoVoted(name);
-                        }
-                        button.setText("START");
-                        whoSpeak.setText("Речи игрока " + turnOfSpeech);
-                        forSpeech = 0;
-                    }
+    }
+    public void onClickDay(View view) {
+        if (turnOfSpeech <= PlayerManager.getPlayersCount()) {
+            if(forSpeech == 0){
+                startTimer(textTime);
+                button.setText("STOP");
+                forSpeech++;
+            } else if (forSpeech == 1) {
+                cancelTimer();
+                textTime.setText(startTime);
+                button.setText("NEXT");
+                forSpeech++;
+                turnOfSpeech++;
+            } else{
+                if (PlayerManager.getNumberOfDay() > 1) {
+                    String name = PersonChoice.getSelectedItem().toString();
+                    PlayerManager.addWhoVoted(name);
                 }
-                else
-                {
-                    if (PlayerManager.getNumberOfDay() == 1){
-                        Intent goToNight = new Intent(DayActivity.this, NightActivity.class);
-                        PlayerManager.IncreaseNumberOfDay();
-                        startActivity(goToNight);
-                    }
-                    else{
-                        Intent goToVote = new Intent(DayActivity.this, VoteActivity.class);
-                        PlayerManager.IncreaseNumberOfDay();
-                        startActivity(goToVote);
-                    }
-                }
+                button.setText("START");
+                whoSpeak.setText("Речи игрока " + turnOfSpeech);
+                forSpeech = 0;
             }
-        });
+        }
+        else
+        {
+            if (PlayerManager.getNumberOfDay() == 1){
+                Intent goToNight = new Intent(DayActivity.this, NightActivity.class);
+                PlayerManager.IncreaseNumberOfDay();
+                startActivity(goToNight);
+            }
+            else{
+                Intent goToVote = new Intent(DayActivity.this, VoteActivity.class);
+                PlayerManager.IncreaseNumberOfDay();
+                startActivity(goToVote);
+            }
+        }
     }
 
-    private void startTimer(TextView text, ProgressBar progress){
+    private void startTimer(TextView text){
         timer = new CountDownTimer(PlayerManager.getSpeechTime() * 1000, 1000) {
             @Override
             public void onTick(long l) {
-                text.setText("" + l/1000);
-                progress.setProgress((int) l/1000);
+                seconds = (l/1000)%60;
+                minutes = (l/(1000*60))%60;
+                time = String.format("%d:%d", minutes, seconds);
+                text.setText(time);
             }
             @Override
             public void onFinish() {
