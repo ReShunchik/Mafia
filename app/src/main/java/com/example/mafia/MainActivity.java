@@ -1,13 +1,14 @@
 package com.example.mafia;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickMain(View view){
-        if(PlayerManager.getPlayersCount() < 10){
+        if(PlayerManager.getPlayersCount() < 5){
             Toast notEnough = Toast.makeText(this, "Не хватает игроков",Toast.LENGTH_LONG);
             notEnough.show();
         }
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             emptyAdd.show();
         } else{
             PlayerManager.addPlayers(name);
-            @SuppressLint("DefaultLocale") String info = String.format("%d.%s", PlayerManager.getPlayersCount(), name);
+            String info = String.format(Locale.ENGLISH, "%d.%s", PlayerManager.getPlayersCount(), name);
             playersNames += (info + "\n");
             playersInfo.setText(playersNames);
             inputPlayers.setText("");

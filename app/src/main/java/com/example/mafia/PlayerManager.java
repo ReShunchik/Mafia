@@ -3,18 +3,19 @@ package com.example.mafia;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 
 public class PlayerManager{
-        private static ArrayList<Player> players = new ArrayList<>();                                 // массив хранящий информацию об игроке
-        private static HashSet<String> whoVotednoDublicate = new HashSet<>();                         // игроки на голосовании
+        private static final ArrayList<Player> players = new ArrayList<>();                           // массив хранящий информацию об игроке
+        private static final HashSet<String> whoVotednoDublicate = new HashSet<>();                   // игроки на голосовании
         private static  ArrayList<String> whoVoted;
         public static String[] roles = {"Мирный", "Мафия","Комиссар","Дон"};                          // все роли
         private static String killedPlayer = "никто";                                                 // последний убитый мафией игрок
         private static long speechTime;                                                               // время на речь
         private static int NumberOfDay = 1;                                                           // день игры
-        private static int maxNumberOfVote = 0;                                                          // максимальный голос
-        private static byte mafiasCount = 0;                                                          // число мафий
+
+        private static int mafiasCount = 0;                                                          // число мафий
 
 
 
@@ -48,16 +49,7 @@ public class PlayerManager{
                     mafiasCount++;
         }                                                                                         // присваивание роли каждому игроку
         public static void setSpeechTime(long time){speechTime = time;}                               // установление времени на речь
-        public static void setVote(String name, int vote){
-            if(vote > maxNumberOfVote)
-                setMaxNumberOfVote(vote);
-            for(Player player: players)
-            {
-                if(name.equals(player.getName()))
-                    player.setNumberOfVote(vote);
-            }
-        }                                        // установка голоса за игрока
-        public static void setMaxNumberOfVote(int number){maxNumberOfVote = number;}                        // устнановка максимального голоса
+
         public static void setKilledPlayer(String name){killedPlayer = name;}                         // установка полсдеднего убитого игрока мафией
 
         public static boolean checkEmptyName(String checkName){
@@ -70,10 +62,9 @@ public class PlayerManager{
             return false;
 
         }                                      // проверка на совпадение имён
-        public static boolean checkRightNames(String namesForCheck){
-            String[] names = namesForCheck.split(",");
-            for(String name: names)
-                if(getPlayersNames().indexOf(name) == -1)
+        public static boolean checkRightNames(String[] namesForCheck){
+            for(String name: namesForCheck)
+                if(!getPlayersNames().contains(name))
                     return false;
             return true;
         }                              // если ли такое имя в списке игроков
@@ -93,23 +84,17 @@ public class PlayerManager{
             }
             setKilledPlayer(name);
         }                                               // смерть игрока
-        public static void kickPlayer(){
-        Iterator<Player> iterator = players.iterator();
-        Player player;
-        while(iterator.hasNext())
-        {
-            player = iterator.next();
-            if(player.getNumberOfVote() == maxNumberOfVote)
-            {
-                if(player.getRole().equals("mafia") || player.getRole().equals("don"))
-                    mafiasCount--;
-                iterator.remove();
+        public static void kickPlayer(String name){
+            Iterator<Player> iterator = players.iterator();
+            Player player;
+            while(iterator.hasNext()){
+                player = iterator.next();
+                if(player.getName().equals(name)) {
+                    iterator.remove();
+                    return;
+                }
             }
-            else
-                player.setNumberOfVote(0);
-        }
-        whoVotednoDublicate.clear();
-        setMaxNumberOfVote(0);
+            whoVotednoDublicate.clear();
     }                                                         // выкидывание на голосовании
 
         public static void addWhoVoted(String name){
@@ -117,9 +102,7 @@ public class PlayerManager{
         }                                              // создание списка игороков на голосование
 
         public static boolean isEnd(){
-            if(((getPlayersCount() - mafiasCount) <= (mafiasCount+1)) || mafiasCount == 0)
-                return true;
-            return false;
+            return ((getPlayersCount() - mafiasCount) <= (mafiasCount + 1)) || mafiasCount == 0;
         }                                                            // проверка на конец игры
         public static String whoWin(){
             if(mafiasCount == 0)
@@ -128,18 +111,18 @@ public class PlayerManager{
         }                                                            // кто выйграл
 
         public static ArrayList<String> getPlayersNames(){
-            ArrayList<String> names = new ArrayList<String>();
+            ArrayList<String> names = new ArrayList<>();
             for(Player player: players)
                 names.add(player.getName());
             return names;
 
         }                                        // получение списка имён игроков
         public static String getMafiasNames(){
-            String names = "";
+            StringBuilder names = new StringBuilder();
             for(Player player: players)
                 if("don".equals(player.getRole()) || "mafia".equals(player.getRole()))
-                    names += (player.getName() + ", ");
-            return names;
+                    names.append(player.getName()).append(", ");
+            return names.toString();
 
         }                                                    // кто мафия
         public static String getDonName(){
@@ -160,15 +143,18 @@ public class PlayerManager{
             return name;
 
         }                                                   // кто комиссар
-        public static byte getPlayersCount(){
-            return (byte)players.size();
+        public static int getPlayersCount(){
+            return players.size();
         }                                                     // сколько игроков в игре осталось
         public static long getSpeechTime(){return speechTime;}                                        // сколько времени на речь
         public static String getKilledPlayer(){return killedPlayer;}                                  // получение убитого игрока
         public static String[] getRoles(){return roles;}                                              // список всех ролей в игре
-        public static String getWhoVoted(int position){
+        public static String getOneVoted(int position){
             return whoVoted.get(position);
         }                                           // список всех игроков на голосовании
+        public static ArrayList<String> getAllVoted(){
+            return whoVoted;
+        }
         public static int getCountVoted(){
             return whoVoted.size();
         }                                                        // сколько игроков на голосовании
@@ -185,11 +171,10 @@ public class PlayerManager{
 
         public static void IncreaseNumberOfDay(){
             NumberOfDay++;
-            setToArray();
+            listToArray((List<String>) whoVotednoDublicate);
         }                                                 // новый день
-       private static void setToArray(){
-            whoVoted = new ArrayList<>(whoVotednoDublicate);
+        public static void listToArray(List<String> voted){
+            whoVoted = new ArrayList<>(voted);
        }
-
     }
 

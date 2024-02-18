@@ -10,9 +10,9 @@
         android:id="@+id/wake_up_in_night"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="text"
-        android:textSize="25sp"
+        android:layout_marginTop="@dimen/standart_marginBetween"
+        android:text=""
+        android:textSize="@dimen/norm_text_size"
         android:gravity="center"
         android:onClick="onClickNight"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,39 +22,40 @@
 
     <Spinner
         android:id="@+id/MafiaChoice"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="@dimen/spinner_width"
+        android:layout_height="@dimen/spinner_height"
+        android:layout_marginTop="@dimen/standart_marginBetween"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wake_up_in_night" />
 
-    <Button
-        android:id="@+id/EndNight"
-        android:layout_width="240dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="28dp"
-        android:backgroundTint="@color/red"
-        android:fontFamily="@font/irishgrover_regular"
-        android:gravity="center|center_vertical"
-        android:text="@string/next"
-        android:textSize="55sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/black"
-        app:strokeWidth="4dp" />
-
     <TextView
         android:id="@+id/info"
-        android:layout_width="300dp"
-        android:layout_height="250dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center|center_vertical"
         android:text="TextView"
-        android:textSize="25sp"
+        android:textSize="@dimen/norm_text_size"
         app:layout_constraintBottom_toTopOf="@+id/EndNight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MafiaChoice" />
+
+    <Button
+        android:id="@+id/EndNight"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginBottom="@dimen/button_marginBottom"
+        android:backgroundTint="@color/red"
+        android:fontFamily="@font/irishgrover_regular"
+        android:gravity="center|center_vertical"
+        android:text="@string/next"
+        android:textSize="@dimen/button_text_size"
+        android:onClick="onClickNight"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="@dimen/button_stickWidht" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

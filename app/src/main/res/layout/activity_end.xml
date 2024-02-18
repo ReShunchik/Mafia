@@ -8,10 +8,10 @@
 
     <TextView
         android:id="@+id/EndText"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:text="text"
-        android:textSize="50sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="@dimen/high_text_size"
         android:gravity="center|center_vertical"
         app:layout_constraintBottom_toTopOf="@+id/endButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,19 +20,19 @@
 
     <Button
         android:id="@+id/endButton"
-        android:layout_width="240dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="30dp"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/button_marginBottom"
         android:backgroundTint="@color/red"
         android:fontFamily="@font/irishgrover_regular"
         android:gravity="center|center_vertical"
         android:text="@string/endText"
-        android:textSize="55sp"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/black"
-        app:strokeWidth="4dp" />
+        app:strokeWidth="@dimen/button_stickWidht" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

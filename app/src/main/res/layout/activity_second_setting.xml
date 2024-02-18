@@ -6,60 +6,55 @@
     android:layout_height="match_parent"
     tools:context=".SecondSetting">
 
-    <Button
-        android:id="@+id/start_button2"
-        android:layout_width="240dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="28dp"
-        android:backgroundTint="@color/red"
-        android:fontFamily="@font/irishgrover_regular"
-        android:gravity="center|center_vertical"
-        android:text="@string/start"
-        android:textSize="55sp"
-        android:onClick="onClickStartGame"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/black"
-        app:strokeWidth="4dp" />
-
     <EditText
         android:id="@+id/EnterMafia"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="@dimen/input_width"
+        android:layout_height="@dimen/input_height"
+        android:layout_marginTop="@dimen/standart_marginBetween"
         android:ems="10"
         android:inputType="text"
+        android:textSize="@dimen/input_size"
         android:gravity="center|center_vertical"
         android:hint="@string/mafia"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/EnterDon"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:inputType="text"
-        android:gravity="center|center_vertical"
-        android:hint="@string/don"
+    <Spinner
+        android:id="@+id/don_name"
+        android:layout_width="@dimen/input_width"
+        android:layout_height="@dimen/input_height"
+        android:layout_marginTop="@dimen/standart_marginBetween"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EnterMafia" />
 
-    <EditText
-        android:id="@+id/EnterCommissar"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:inputType="text"
-        android:gravity="center|center_vertical"
-        android:hint="@string/comissar"
+    <Spinner
+        android:id="@+id/com_name"
+        android:layout_width="@dimen/input_width"
+        android:layout_height="@dimen/input_height"
+        android:layout_marginTop="@dimen/standart_marginBetween"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EnterDon" />
+        app:layout_constraintTop_toBottomOf="@+id/don_name" />
+
+    <Button
+        android:id="@+id/start_button2"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginBottom="@dimen/button_marginBottom"
+        android:backgroundTint="@color/red"
+        android:fontFamily="@font/irishgrover_regular"
+        android:gravity="center|center_vertical"
+        android:text="@string/start"
+        android:textSize="@dimen/button_text_size"
+        android:onClick="onClickStartGame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="@dimen/button_stickWidht" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
