@@ -12,11 +12,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
-/**
- * Created by Parsania Hardik on 03-Jan-17.
- */
 public class VoteAdapter extends BaseAdapter {
 
     private final Context context;
@@ -75,7 +71,7 @@ public class VoteAdapter extends BaseAdapter {
                 holder.editText.setVisibility(View.GONE);
             convertView.setTag(holder);
 
-            convertView.setTag(holder);
+            //convertView.setTag(holder);
         }else {
             // the getTag returns the viewHolder object set as a tag to the view
             holder = (ViewHolder)convertView.getTag();
@@ -94,7 +90,6 @@ public class VoteAdapter extends BaseAdapter {
                 if(value.equals(""))
                     value = "0";
                 EditTextValues.put(names.get(position), Integer.parseInt(value));
-
             }
 
             @Override

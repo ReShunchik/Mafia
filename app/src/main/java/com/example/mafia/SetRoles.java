@@ -16,7 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class SecondSetting extends AppCompatActivity {
+public class SetRoles extends AppCompatActivity {
 
     private Spinner donSelect, comSelect;
     private TextView don, comissar;
@@ -25,7 +25,7 @@ public class SecondSetting extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second_setting);
+        setContentView(R.layout.activity_set_roles);
         don = findViewById(R.id.don);
         comissar = findViewById(R.id.comissar);
         donSelect = findViewById(R.id.don_name);

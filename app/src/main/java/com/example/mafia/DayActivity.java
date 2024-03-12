@@ -78,7 +78,7 @@ public class DayActivity extends AppCompatActivity {
             }
             else{
                 Intent intent;
-                if(GameManager.getNumberOfDay() == 1)
+                if(GameManager.getAllVoted().size() == 0 || GameManager.getNumberOfDay() == 1)
                     intent = new Intent(this, NightActivity.class);
                 else{
                     intent = new Intent(this, VoteActivity.class);

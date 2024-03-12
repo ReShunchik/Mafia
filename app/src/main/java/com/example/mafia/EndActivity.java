@@ -26,7 +26,8 @@ public class EndActivity extends AppCompatActivity {
 
     public void onClickNewGame(View  view){
         GameManager.resetGame();
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, StartActivity.class);
+        intent.putExtra("names", GameManager.getPlayersNames());
         startActivity(intent);
     }
 }

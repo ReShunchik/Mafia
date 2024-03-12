@@ -5,11 +5,11 @@
     <string name="input_num">Введите число</string>
     <string name="spisok">Список игроков</string>
     <string name="players">Введите имя игрока</string>
-    <string name="add">ДОБАВИТЬ</string>
+    <string name="add">ДОБАВИТЬ ИГРОКА</string>
 
 
     <string name="input_time1">Время \n на речь</string>
-    <string name="input_time2">время на речь(сек)</string>
+    <string name="input_time2">время на речь(секунды)</string>
     <string name="start">START</string>
     <string name="role">Роль</string>
     <string name="count">Количетво</string>

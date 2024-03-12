@@ -2,6 +2,7 @@ package com.example.mafia;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 
 
 public class GameManager {
@@ -12,12 +13,14 @@ public class GameManager {
     private static StringBuilder kickedPlayers = new StringBuilder("Выгнали: ");
     private static long speechTime;                                                                  // время на речь
     private static int NumberOfDay = 1;                                                              // день игры
+    private static boolean isNewGame = false;
 
 
-
-    public static void addPlayers(String name){
-        Player player = new Player(name);
-        players.add(player);
+    public static void setPlayers(ArrayList<String> names){
+        for(String name: names){
+            Player player = new Player(name);
+            players.add(player);
+        }
     }                                                  // массив со всеми игроками
     public static void setRoles(ArrayList<String> mafias, String don, String comissar)
     {
@@ -49,13 +52,12 @@ public class GameManager {
     }
     public static void setKilledPlayer(String name){killedPlayer = name;}                            // установка полсдеднего убитого игрока мафией
 
-    public static boolean checkEmptyName(String checkName){
-        return checkName.equals("");
-    }
-    public static boolean CheckSameName(String checkName){
-        for(Player player: players)
-            if(checkName.equals(player.getName()))
-                return true;
+    public static boolean namesCheck(ArrayList<String> checkName){
+        for(int i = 0; i < checkName.size()-1; i++)
+            for(int j = i + 1; j < checkName.size(); j++)
+                if(checkName.get(i).equals(checkName.get(j)))
+                    return true;
+        setPlayers(checkName);
         return false;
 
     }                                       // проверка на совпадение имён
@@ -172,9 +174,17 @@ public class GameManager {
     }                                                    // новый день
 
     public static void resetGame(){
-        players.clear();
         setKilledPlayer("никто");
         kickedPlayers = new StringBuilder("Кикнуты:");
         NumberOfDay = 1;
+        isNewGame = true;
+    }
+    public static ArrayList<String> oldPlayers(){
+        ArrayList<String> oldNames = getPlayersNames();
+        players.clear();
+        return oldNames;
+    }
+    public static boolean getIsNewGame(){
+        return isNewGame;
     }
 }
